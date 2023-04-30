@@ -9,7 +9,7 @@
   ],
   "plugins": ["@typescript-eslint", "react", "prettier", "react-hooks"],
   "parserOptions": {
-    "project": "./tsconfig.json"
+    // "project": "./tsconfig.json"
   },
   "rules": {
     "react-hooks/rules-of-hooks": "error",
