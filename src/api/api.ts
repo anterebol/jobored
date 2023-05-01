@@ -2,7 +2,7 @@ import { authProps } from '@/constants/authProps';
 import { headers } from '@/constants/headers';
 import { authPath, cataloguesPath, vacanciesPath } from '@/constants/path';
 import { url } from '@/constants/url';
-import { FilterVacanciesType, AuthPropsType } from '@/types/types';
+import { FilterVacanciesType } from '@/types/types';
 import { createPath } from '@/utils/createPath';
 
 export const getToken = async () => {
