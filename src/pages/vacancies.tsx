@@ -9,22 +9,22 @@ const Vacancies: NextPage = () => {
 
   const [vacancies, setVacancies] = useState([] as Array<VacancyType>);
   useEffect(() => {
-    if (vacancies.length === 0) {
-      const getData = async () => {
-        let token = localStorage.getItem('token') || '';
-        if (!token) {
-          token = await getToken();
-        }
+    const getData = async () => {
+      let token = localStorage.getItem('token') || '';
+      if (!token) {
+        token = await getToken();
+      }
 
-        const response = await getVacancies(token, {
-          published: 1,
-          count: 30,
-        } as FilterVacanciesType);
-        const data = (await response.json()) as { objects: Array<VacancyType> };
-        setVacancies([...data.objects]);
-      };
-      getData();
-    }
+      const response = await getVacancies(token, {
+        published: 1,
+        count: 30,
+      } as FilterVacanciesType);
+
+      const data = (await response.json()) as { objects: Array<VacancyType> };
+
+      setVacancies([...data.objects]);
+    };
+    getData();
   }, []);
   return (
     <Layout>

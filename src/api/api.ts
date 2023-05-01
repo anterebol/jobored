@@ -16,8 +16,9 @@ export const getToken = async () => {
       }
     }
   );
-  localStorage.setItem('token', response.access_token);
-  return response.access_token;
+  const token = response.access_token;
+  localStorage.setItem('token', token);
+  return token;
 };
 
 export const getVacancies = async (
@@ -29,8 +30,6 @@ export const getVacancies = async (
     method: 'GET',
     headers: {
       ...headers,
-      'X-Api-App-Id':
-        'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948',
       Authorization: `Bearer ${token}`,
     },
   });
@@ -39,19 +38,11 @@ export const getVacancies = async (
 
 export const getCatalouge = async () => {
   const path = createPath(url, cataloguesPath, undefined);
-  const catalogues = await fetch(path, {
+  const response = await fetch(path, {
     method: 'GET',
-    headers: {
-      Accept: '*/*',
-      'content-type': 'application/json',
-      'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
-    },
+    headers: headers,
     redirect: 'follow',
   });
-  const data = await catalogues.json();
-  return {
-    props: {
-      data: data,
-    },
-  };
+  const data = await response.json();
+  return data;
 };
