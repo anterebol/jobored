@@ -3,7 +3,7 @@ import { Header } from './header/Header';
 
 export const Layout: FC<PropsWithChildren<unknown>> = ({ children }) => {
   return (
-    <div>
+    <div className="layout">
       <Header />
       {children}
     </div>
