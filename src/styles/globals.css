@@ -3,6 +3,9 @@
   margin: 0;
   padding: 0;
 }
+li {
+  list-style-type: none
+}
 p, h1, h2, h3, h4, h5, h6, a, span {
   font-family: 'Inter';
   font-style: normal;
@@ -13,4 +16,7 @@ a {
 }
 a:active, a:hover {
   color: black;
+}
+.layout {
+  background: rgb(248, 245, 245);
 }
