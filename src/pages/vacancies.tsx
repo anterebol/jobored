@@ -17,7 +17,6 @@ const Vacancies: NextPage = () => {
 
       const response = await getVacancies(token, {
         published: 1,
-        count: 30,
       } as FilterVacanciesType);
 
       const data = (await response.json()) as { objects: Array<VacancyType> };
@@ -27,12 +26,12 @@ const Vacancies: NextPage = () => {
     getData();
   }, []);
   return (
-    <Layout>
+    <>
       <h1>Vacancies</h1>
       {vacancies.map((vacancy: VacancyType) => {
         return <h1 key={vacancy.id}>{vacancy.id}</h1>;
       })}
-    </Layout>
+    </>
   );
 };
 
