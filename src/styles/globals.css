@@ -12,11 +12,15 @@ p, h1, h2, h3, h4, h5, h6, a, span {
 }
 a {
   text-decoration: none;
-  color: #5E96FC;
+  color: black;
 }
 a:active, a:hover {
+  color: #5E96FC;
+}
+a:hover p {
   color: black;
 }
 .layout {
+  min-height: 100vh;
   background: rgb(248, 245, 245);
 }

@@ -1,4 +1,4 @@
-import { Box, TextInput, Checkbox, Group, Button, MultiSelect, NumberInput } from '@mantine/core';
+import { Box, Group, Button, MultiSelect, NumberInput } from '@mantine/core';
 import styles from './form.module.css';
 import { useForm } from '@mantine/form';
 import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
@@ -36,14 +36,16 @@ export const FormVacancy = (props: { catalogues: Array<CatalougeType> }) => {
         />
         <h3 className={styles['form-title']}>Оклад</h3>
         <NumberInput
-          // defaultValue={0}
-          // style={{ width: 275 }}
           placeholder="От"
           parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
           rightSection={
             <div className={styles['form-buttons-salary']}>
-              <IconChevronUp width={12} height={12} style={{ display: 'block !important' }} />
-              <IconChevronDown width={12} height={12} style={{ display: 'block !important' }} />
+              <button>
+                <IconChevronUp width={12} height={12} style={{ display: 'block !important' }} />
+              </button>
+              <button>
+                <IconChevronDown width={12} height={12} style={{ display: 'block !important' }} />
+              </button>
             </div>
           }
         />
