@@ -1,0 +1,25 @@
+.vacancy-box {
+  padding: 24px;
+  background: white;
+  margin: 16px 0;
+  position: relative;
+  cursor: pointer;
+  left: 0;
+  bottom: 0;
+  transition: ease-in .3s;
+}
+.vacancy-box:hover {
+  left: -5px;
+  bottom: -5px;
+  box-shadow: 3px 3px 10px 1px black;
+}
+.vacancy-star {
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  cursor: pointer;
+  transition: ease-in .2s;
+}
+.vacancy-star:hover {
+  opacity: .6;
+}

@@ -2,5 +2,23 @@
   display: flex;
   margin: 0 auto;
   margin-top: 40px;
-  width: 1100px;
+  max-width: 1100px;
+  justify-content: space-between;
+}
+.vacancies-page > div {
+  margin: 0 10px;
+}
+.right-bar {
+  width: 100%;
+}
+.search-vacancy-form {
+  min-width: 100%;
+}
+.search-vacancy-form__button {
+  position: relative;
+  right: 22px;
+  font-size: 14px;
+  line-height: 21px;
+  padding: 4px 20px;
+  border-radius: 8px;
 }
