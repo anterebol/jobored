@@ -26,3 +26,7 @@ export interface VacancyType {
   payment_from: string;
   currency: string;
 }
+export interface CatalougeType {
+  key: number;
+  title: string;
+}
