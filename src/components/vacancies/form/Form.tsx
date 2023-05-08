@@ -1,8 +1,11 @@
 import { Box, Group, Button, MultiSelect, NumberInput } from '@mantine/core';
+import Image from 'next/image';
 import styles from './form.module.css';
 import { useForm } from '@mantine/form';
 import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
 import { CatalougeType } from '@/types/types';
+import iconX from '@/assets/iconX.svg';
+import down from '@/assets/down.svg';
 
 export const FormVacancy = (props: { catalogues: Array<CatalougeType> }) => {
   const { catalogues } = props;
@@ -22,21 +25,29 @@ export const FormVacancy = (props: { catalogues: Array<CatalougeType> }) => {
   return (
     <Box className={styles['form-box']}>
       <form className={styles.form} onSubmit={form.onSubmit((values) => console.log(values))}>
-        <div style={{ display: 'flex' }}>
+        <div className={styles['form-head']}>
           <h2 className={styles['form-title']}>Фильтры</h2>
-          <button>Сбросить все</button>
+          <button className={styles['form-reset-btn']}>
+            Сбросить все <Image src={iconX} alt={'X'} />
+          </button>
         </div>
-        <h3 className={styles['form-title']}>Отрасль</h3>
+        <h3 className={styles['form-article-title']}>Отрасль</h3>
         <MultiSelect
+          className={styles['form-select']}
           data={catalogues.map((industry) => industry.title)}
           placeholder="Выберите отрасль"
-          rightSection={<IconChevronDown size="1rem" />}
+          rightSection={
+            <button className={styles['form-select-btn']}>
+              <Image src={down} alt={'down'} />
+            </button>
+          }
           styles={{ rightSection: { pointerEvents: 'none' } }}
           rightSectionWidth={40}
         />
-        <h3 className={styles['form-title']}>Оклад</h3>
+        <h3 className={styles['form-article-title']}>Оклад</h3>
         <NumberInput
           placeholder="От"
+          style={{ marginBottom: 8 }}
           parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
           rightSection={
             <div className={styles['form-buttons-salary']}>
@@ -50,23 +61,23 @@ export const FormVacancy = (props: { catalogues: Array<CatalougeType> }) => {
           }
         />
         <NumberInput
-          // defaultValue={0}
-          // style={{ width: 275 }}
-          placeholder="От"
+          placeholder="До"
           parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
           rightSection={
             <div className={styles['form-buttons-salary']}>
               <button>
-                <IconChevronUp width={12} height={12} style={{ display: 'block !important' }} />
+                <IconChevronUp width={12} height={12} style={{ display: 'block' }} />
               </button>
               <button>
-                <IconChevronDown width={12} height={12} style={{ display: 'block !important' }} />
+                <IconChevronDown width={12} height={12} style={{ display: 'block' }} />
               </button>
             </div>
           }
         />
         <Group>
-          <Button type="submit">Применить</Button>
+          <Button className={styles['form-submit-button']} type="submit">
+            Применить
+          </Button>
         </Group>
       </form>
     </Box>

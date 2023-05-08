@@ -2,7 +2,7 @@ import { getToken, getVacancies } from '@/api/api';
 import { CatalougeType, FilterVacanciesType, VacancyType } from '@/types/types';
 import { FormVacancy } from '@/components/vacancies/form/Form';
 import { useEffect, useState } from 'react';
-import styles from '../styles/Vacancies.module.css';
+import styles from '@/styles/Vacancies.module.css';
 import { Vacancy } from '@/components/vacancies/Vacancy';
 import { cataloguesPath } from '@/constants/path';
 import { createPath } from '@/utils/createPath';
@@ -35,8 +35,7 @@ const Vacancies = ({ catalogues }: { catalogues: Array<CatalougeType> }) => {
       } as FilterVacanciesType);
 
       const data = (await response.json()) as { objects: Array<VacancyType> };
-
-      setVacancies([...data.objects]);
+      setVacancies(data.objects);
     };
     getData();
   }, []);
@@ -60,13 +59,15 @@ const Vacancies = ({ catalogues }: { catalogues: Array<CatalougeType> }) => {
           />
         </form>
         <ul>
-          {vacancies.map((vacancy: VacancyType) => {
-            return (
-              <li key={vacancy.id}>
-                <Vacancy vacancy={vacancy} chosen={false} />
-              </li>
-            );
-          })}
+          {vacancies
+            ? vacancies.map((vacancy: VacancyType) => {
+                return (
+                  <li key={vacancy.id}>
+                    <Vacancy vacancy={vacancy} chosen={false} details={false} />
+                  </li>
+                );
+              })
+            : null}
         </ul>
       </div>
     </div>
