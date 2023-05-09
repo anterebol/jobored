@@ -3,7 +3,6 @@
   background: white;
   width: 275px 
 }
-<<<<<<< HEAD
 .form-head {
   display: flex;
   justify-content: space-between;
@@ -43,13 +42,6 @@
   font-weight: 700;
   font-size: 16px;
   margin-bottom: 8px;
-=======
-.form-buttons-salary {
-  position: relative;
-  right: 8px;
-  /* display: flex;
-  flex-wrap: nowrap; */
->>>>>>> 3c021153967dfd9ce624435b13c46d0b2dc6a329
 }
 .form-buttons-salary > button {
   border: none;
@@ -59,7 +51,6 @@
   display: block;
   width: 12px;
   height: 12px ;
-<<<<<<< HEAD
   cursor: pointer;
   opacity: .4;
   transition: ease .4s;
@@ -78,6 +69,4 @@
 }
 .form-submit-button:hover {
   background: #508af6;
-=======
->>>>>>> 3c021153967dfd9ce624435b13c46d0b2dc6a329
 }

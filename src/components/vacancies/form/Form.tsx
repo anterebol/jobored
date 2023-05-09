@@ -55,10 +55,6 @@ export const FormVacancy = (props: { catalogues: Array<CatalougeType> }) => {
               </button>
               <button>
                 <IconChevronDown width={12} height={12} style={{ display: 'block' }} />
-                <IconChevronUp width={12} height={12} style={{ display: 'block !important' }} />
-              </button>
-              <button>
-                <IconChevronDown width={12} height={12} style={{ display: 'block !important' }} />
               </button>
             </div>
           }
@@ -73,10 +69,6 @@ export const FormVacancy = (props: { catalogues: Array<CatalougeType> }) => {
               </button>
               <button>
                 <IconChevronDown width={12} height={12} style={{ display: 'block' }} />
-                <IconChevronUp width={12} height={12} style={{ display: 'block !important' }} />
-              </button>
-              <button>
-                <IconChevronDown width={12} height={12} style={{ display: 'block !important' }} />
               </button>
             </div>
           }
@@ -85,7 +77,6 @@ export const FormVacancy = (props: { catalogues: Array<CatalougeType> }) => {
           <Button className={styles['form-submit-button']} type="submit">
             Применить
           </Button>
-          <Button type="submit">Применить</Button>
         </Group>
       </form>
     </Box>
