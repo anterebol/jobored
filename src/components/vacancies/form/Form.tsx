@@ -52,10 +52,10 @@ export const FormVacancy = (props: { catalogues: Array<CatalougeType> }) => {
           rightSection={
             <div className={styles['form-buttons-salary']}>
               <button>
-                <IconChevronUp width={12} height={12} style={{ display: 'block !important' }} />
+                <IconChevronUp width={12} height={12} style={{ display: 'block' }} />
               </button>
               <button>
-                <IconChevronDown width={12} height={12} style={{ display: 'block !important' }} />
+                <IconChevronDown width={12} height={12} style={{ display: 'block' }} />
               </button>
             </div>
           }

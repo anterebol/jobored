@@ -63,7 +63,7 @@ const Vacancies = ({ catalogues }: { catalogues: Array<CatalougeType> }) => {
             ? vacancies.map((vacancy: VacancyType) => {
                 return (
                   <li key={vacancy.id}>
-                    <Vacancy vacancy={vacancy} chosen={false} details={false} />
+                    <Vacancy vacancy={vacancy} details={false} path="vacancies" />
                   </li>
                 );
               })

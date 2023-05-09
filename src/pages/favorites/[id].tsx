@@ -3,9 +3,9 @@ import { Vacancy } from '@/components/vacancies/Vacancy';
 import { VacancyType } from '@/types/types';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const CurrentVacancy: NextPage = () => {
+const Favorite: NextPage = () => {
   const { id } = useRouter().query;
   const [vacancy, setVacancy] = useState({} as VacancyType);
   useEffect(() => {
@@ -32,4 +32,4 @@ const CurrentVacancy: NextPage = () => {
     </>
   );
 };
-export default CurrentVacancy;
+export default Favorite;
