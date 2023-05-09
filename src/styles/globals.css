@@ -28,12 +28,6 @@ button {
   border: none;
   background: none;
 }
-a:active, a:hover {
-  color: #5E96FC;
-}
-a:hover > h2 {
-  color: black !important;
-}
 .layout {
   min-height: 100vh;
   background: rgb(248, 245, 245);

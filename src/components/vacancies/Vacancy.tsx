@@ -15,7 +15,7 @@ export const Vacancy = ({ vacancy, details, path }: VacancyProps) => {
   const [favorites, setFavorites] = useState([] as Array<string>);
   useEffect(() => {
     setFavorites(JSON.parse(localStorage.getItem('favorites') || '[]'));
-  }, [favorites]);
+  }, []);
   const [starHoverd, setStarHovered] = useState(false);
   return (
     <>
