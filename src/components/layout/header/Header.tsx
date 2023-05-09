@@ -13,7 +13,11 @@ export const Header: FC = () => {
           <Link href={'/vacancies'} className={styles['header-links__item']}>
             Поиск Вакансий
           </Link>
+<<<<<<< HEAD
           <Link href={'/favorites'} className={(styles['header-links__item'], styles.left)}>
+=======
+          <Link href={'/favorits'} className={(styles['header-links__item'], styles.left)}>
+>>>>>>> 3c021153967dfd9ce624435b13c46d0b2dc6a329
             Избранное
           </Link>
         </div>

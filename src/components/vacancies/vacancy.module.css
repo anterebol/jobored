@@ -67,4 +67,8 @@
 .details-box > p {
   font-weight: 400;
   font-size: 16px;
+  transition: ease-in .2s;
+}
+.vacancy-star:hover {
+  opacity: .6;
 }

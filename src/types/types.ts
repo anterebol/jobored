@@ -31,3 +31,7 @@ export interface CatalougeType {
   key: number;
   title: string;
 }
+export interface CatalougeType {
+  key: number;
+  title: string;
+}

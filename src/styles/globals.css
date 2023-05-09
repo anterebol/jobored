@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+=======
+>>>>>>> 3c021153967dfd9ce624435b13c46d0b2dc6a329
 * {
   box-sizing: border-box;
   margin: 0;
@@ -8,13 +11,18 @@ li {
   list-style-type: none
 }
 p, h1, h2, h3, h4, h5, h6, a, span {
+<<<<<<< HEAD
   font-family: 'Inter', sans-serif;
+=======
+  font-family: 'Inter';
+>>>>>>> 3c021153967dfd9ce624435b13c46d0b2dc6a329
   font-style: normal;
 }
 a {
   text-decoration: none;
   color: black;
 }
+<<<<<<< HEAD
 a:hover p {
   color: black;
 }
@@ -27,6 +35,14 @@ button {
   border: none;
   background: none;
 }
+=======
+a:active, a:hover {
+  color: #5E96FC;
+}
+a:hover p {
+  color: black;
+}
+>>>>>>> 3c021153967dfd9ce624435b13c46d0b2dc6a329
 .layout {
   min-height: 100vh;
   background: rgb(248, 245, 245);
