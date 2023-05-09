@@ -35,6 +35,17 @@ export const getVacancies = async (
   });
   return response;
 };
+export const getVacancy = async (token: string, id: string) => {
+  const path = createPath(url, vacanciesPath + `/${id}`, undefined);
+  const response = await fetch(path, {
+    method: 'GET',
+    headers: {
+      ...headers,
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response;
+};
 
 export const getCatalouge = async () => {
   const path = createPath(url, cataloguesPath, undefined);

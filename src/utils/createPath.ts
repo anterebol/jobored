@@ -5,8 +5,9 @@ export const createPath = (
   path: string,
   params: FilterVacanciesType | AuthPropsType | undefined
 ) => {
-  let way = `${url}/${path}/?`;
+  let way = `${url}/${path}`;
   if (params) {
+    way += '/?';
     const paramKeys = Object.keys(params);
     paramKeys.forEach((key: string) => {
       way += `${key}=${params[key]}&`;

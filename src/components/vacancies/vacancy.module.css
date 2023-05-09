@@ -1,0 +1,74 @@
+.vacancy-box {
+  padding: 24px;
+  background: white;
+  margin: 16px auto;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  max-width: 770px;
+  transition: ease-in .3s;
+  font-size: 16px;
+  cursor: default;
+}
+.vacancy-title {
+  max-width: 90%;
+}
+.vacancy-box.undetails > .vacancy-title {
+  font-weight: 600;
+  font-size: 20px;
+  color: #5E96FC;
+}
+.vacancy-box.undetails:hover {
+  left: -5px;
+  bottom: -5px;
+  box-shadow: 3px 3px 10px 1px black;
+  cursor: pointer;
+}
+.vacancy-star-btn {
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  cursor: pointer;
+}
+.vacancy-star-btn:hover {
+  opacity: .7;
+}
+.vacancy-info {
+  display: flex;
+  margin: 13px 0;
+}
+.vacancy-salary {
+  font-weight: 600;
+}
+.vacancy-info-point {
+  margin: 0 12px;
+}
+.vacancy-location {
+  display: flex;
+  align-items: center;
+  height: 16px;
+}
+.vacancy-location > img {
+  margin-right: 12px;
+}
+.details-box {
+  padding: 24px;
+  background: white;
+  max-width: 770px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+.details-box > h3 {
+  font-weight: 700;
+  font-size: 20px;
+  margin: 16px 0;
+  font-style: normal
+}
+.details-box > p {
+  font-weight: 400;
+  font-size: 16px;
+  transition: ease-in .2s;
+}
+.vacancy-star:hover {
+  opacity: .6;
+}
