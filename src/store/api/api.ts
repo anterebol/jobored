@@ -57,17 +57,34 @@ export const getVacancies = createAsyncThunk(
     }
   }
 );
-export const getVacancy = async (token: string, id: string) => {
-  const path = createPath(url, vacanciesPath + `/${id}`, undefined);
-  const response = await fetch(path, {
-    method: 'GET',
-    headers: {
-      ...headers,
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return response;
-};
+
+export const getVacancy = createAsyncThunk(
+  'getVacancy',
+  async (
+    { token, id, vacancyType }: { token: string; id: string; vacancyType: string },
+    { rejectWithValue }
+  ) => {
+    try {
+      const path = createPath(url, vacanciesPath + `/${id}`, undefined);
+      const response = await fetch(path, {
+        method: 'GET',
+        headers: {
+          ...headers,
+          Authorization: `Bearer ${token}`,
+        },
+      }).then(async (res) => {
+        if (!res.ok) {
+          throw new Error(res.status.toString());
+        } else {
+          return await res.text().then((res) => JSON.parse(res));
+        }
+      });
+      return { vacancy: response, vacancyType };
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
 
 export const getCatalouge = async () => {
   const path = createPath(url, cataloguesPath, undefined);

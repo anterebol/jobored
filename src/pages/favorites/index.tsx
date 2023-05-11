@@ -1,30 +1,30 @@
 import { getToken, getVacancies } from '@/store/api/api';
 import { Vacancy } from '@/components/vacancies/Vacancy';
-import { VacancyType, FilterVacanciesType } from '@/types/types';
+import { VacancyType } from '@/types/types';
 import { NextPage } from 'next';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useAppSelector, useAppDispatch } from '@/hooks/hooks';
 
 const Favorits: NextPage = () => {
-  const [vacancies, setVacancies] = useState([] as Array<VacancyType>);
-  const [favorites, setFavorites] = useState([] as Array<string>);
-  // useEffect(() => {
-  //   const data = localStorage.getItem('favorites') || '[]';
-  //   setFavorites(JSON.parse(data));
-  //   const getData = async () => {
-  //     let token = localStorage.getItem('token') || '';
-  //     if (!token) {
-  //       token = await getToken();
-  //     }
-
-  //     const response = await getVacancies(token, {
-  //       published: 1,
-  //     } as FilterVacanciesType);
-
-  //     const data = (await response.json()) as { objects: Array<VacancyType> };
-  //     setVacancies(data.objects);
-  //   };
-  //   getData();
-  // }, []);
+  const { vacancies, token, favorites } = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (!token) {
+      dispatch(getToken());
+    }
+  }, []);
+  useEffect(() => {
+    if (token) {
+      dispatch(
+        getVacancies({
+          token: token,
+          vacanciesParams: {
+            published: 1,
+          },
+        })
+      );
+    }
+  }, [token]);
   return (
     <ul>
       {vacancies

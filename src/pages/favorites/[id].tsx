@@ -1,33 +1,37 @@
-import { getToken, getVacancy } from '@/store/api/api';
 import { Vacancy } from '@/components/vacancies/Vacancy';
-import { VacancyType } from '@/types/types';
+import { useAppSelector, useAppDispatch } from '@/hooks/hooks';
+import { getToken, getVacancy } from '@/store/api/api';
+import { setFavorite } from '@/store/appReducer';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 const Favorite: NextPage = () => {
-  const { id } = useRouter().query;
-  const [vacancy, setVacancy] = useState({} as VacancyType);
+  const { token, vacancies, favorite, favorites } = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
+  const { id } = useRouter().query as { id: string };
+
   useEffect(() => {
-    const getData = async () => {
-      let token = localStorage.getItem('token') || '';
-      if (!token) {
-        token = await getToken();
-      }
-      const response = await getVacancy(token, id as string);
+    if (!token) {
+      dispatch(getToken());
+    }
+  }, []);
 
-      const data = (await response.json()) as VacancyType;
-
-      setVacancy(data);
-    };
-    if (id) {
-      getData();
+  useEffect(() => {
+    if (vacancies.length > 0) {
+      const currentVacancy = vacancies.filter((vacancy) => {
+        if (favorites.includes(vacancy.id) && vacancy.id === Number(id)) return vacancy;
+      })[0];
+      dispatch(setFavorite(currentVacancy));
+    } else if (token && id) {
+      dispatch(getVacancy({ token: token, id: id, vacancyType: 'favorite' }));
     }
   }, [id]);
+
   return (
     <>
-      {Object.keys(vacancy).length > 0 ? (
-        <Vacancy vacancy={vacancy} details={true} path="vacancies" />
+      {Object.keys(favorite).length > 0 ? (
+        <Vacancy vacancy={favorite} details={true} path="vacancies" />
       ) : null}
     </>
   );

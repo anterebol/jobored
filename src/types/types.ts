@@ -16,7 +16,7 @@ export interface AuthPropsType {
   hr: number;
 }
 export interface VacancyType {
-  id: string;
+  id: number;
   profession: string;
   firm_name: string;
   town: { title: string };
