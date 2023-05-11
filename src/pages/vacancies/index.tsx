@@ -1,7 +1,7 @@
-import { getToken, getVacancies } from '@/api/api';
-import { CatalougeType, FilterVacanciesType, VacancyType } from '@/types/types';
+import { getToken } from '@/store/api/api';
+import { CatalougeType } from '@/types/types';
 import { FormVacancy } from '@/components/vacancies/form/Form';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import styles from '@/styles/Vacancies.module.css';
 import { Vacancy } from '@/components/vacancies/Vacancy';
 import { cataloguesPath } from '@/constants/path';
@@ -11,8 +11,12 @@ import { url } from '@/constants/url';
 import { useForm } from '@mantine/form';
 import { Button, TextInput } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
+import { useAppDispatch, useAppSelector } from '@/hooks/hooks';
+import { getVacancies } from '@/store/api/api';
 
 const Vacancies = ({ catalogues }: { catalogues: Array<CatalougeType> }) => {
+  const { vacancies, token } = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
   const form = useForm({
     initialValues: {
       searchVacancy: '',
@@ -22,23 +26,23 @@ const Vacancies = ({ catalogues }: { catalogues: Array<CatalougeType> }) => {
       searchVacancy: (value) => (value ? null : 'Введите текст'),
     },
   });
-  const [vacancies, setVacancies] = useState([] as Array<VacancyType>);
   useEffect(() => {
-    const getData = async () => {
-      let token = localStorage.getItem('token') || '';
-      if (!token) {
-        token = await getToken();
-      }
-
-      const response = await getVacancies(token, {
-        published: 1,
-      } as FilterVacanciesType);
-
-      const data = (await response.json()) as { objects: Array<VacancyType> };
-      setVacancies(data.objects);
-    };
-    getData();
+    if (!token) {
+      dispatch(getToken());
+    }
   }, []);
+  useEffect(() => {
+    if (token) {
+      dispatch(
+        getVacancies({
+          token: token,
+          vacanciesParams: {
+            published: 1,
+          },
+        })
+      );
+    }
+  }, [token]);
   return (
     <div className={styles['vacancies-page']}>
       <div className={styles['left-bar']}>
@@ -59,15 +63,13 @@ const Vacancies = ({ catalogues }: { catalogues: Array<CatalougeType> }) => {
           />
         </form>
         <ul>
-          {vacancies
-            ? vacancies.map((vacancy: VacancyType) => {
-                return (
-                  <li key={vacancy.id}>
-                    <Vacancy vacancy={vacancy} details={false} path="vacancies" />
-                  </li>
-                );
-              })
-            : null}
+          {vacancies.map((vacancy) => {
+            return (
+              <li key={vacancy.id}>
+                <Vacancy vacancy={vacancy} details={false} path="vacancies" />
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>

@@ -1,11 +1,11 @@
 export interface FilterVacanciesType {
-  [key: string]: string | number | undefined;
-  keyword: string | undefined;
-  payment_from: number | undefined;
-  payment_to: number | undefined;
-  catalogues: number | undefined;
-  count: number | undefined;
-  published: number | undefined;
+  // [key: string]: string | number | undefined;
+  keyword?: string | undefined;
+  payment_from?: number | undefined;
+  payment_to?: number | undefined;
+  catalogues?: number | undefined;
+  count?: number | undefined;
+  published?: number | undefined;
 }
 export interface AuthPropsType {
   [key: string]: string | number | undefined;

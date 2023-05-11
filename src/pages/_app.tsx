@@ -1,6 +1,8 @@
 import { Layout } from '@/components/layout/Layout';
+import { store, wrapper } from '@/store/configReducer';
 import '@/styles/globals.css';
 import { MantineProvider } from '@mantine/core';
+import { useStore } from 'react-redux';
 
 function App({ Component, pageProps }: any) {
   return (
@@ -11,4 +13,4 @@ function App({ Component, pageProps }: any) {
     </MantineProvider>
   );
 }
-export default App;
+export default wrapper.withRedux(App);

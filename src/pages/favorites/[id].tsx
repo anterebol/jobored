@@ -1,4 +1,4 @@
-import { getToken, getVacancy } from '@/api/api';
+import { getToken, getVacancy } from '@/store/api/api';
 import { Vacancy } from '@/components/vacancies/Vacancy';
 import { VacancyType } from '@/types/types';
 import { NextPage } from 'next';
