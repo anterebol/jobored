@@ -52,22 +52,25 @@
   margin-right: 12px;
 }
 .details-box {
-  padding: 24px;
+  padding: 24px ;
   background: white;
   max-width: 770px;
   margin: 0 auto;
   margin-bottom: 50px;
+  font-weight: 400;
+  font-size: 16px !important;
 }
-.details-box > h3 {
-  font-weight: 700;
-  font-size: 20px;
-  margin: 16px 0;
+.details-box > b, .details-box > p > b {
+  font-size: 20px !important;
+  margin-bottom: 16px;
   font-style: normal
 }
 .details-box > p {
-  font-weight: 400;
-  font-size: 16px;
-  transition: ease-in .2s;
+  margin-bottom: 16px;
+}
+.details-box > ul > li {
+  list-style-type: disc;
+  margin-left: 24px;
 }
 .vacancy-star:hover {
   opacity: .6;

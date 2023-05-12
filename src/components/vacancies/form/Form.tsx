@@ -8,7 +8,6 @@ import iconX from '@/assets/iconX.svg';
 import down from '@/assets/down.svg';
 
 export const FormVacancy = (props: { catalogues: Array<CatalougeType> }) => {
-  const { catalogues } = props;
   const form = useForm({
     initialValues: {
       paymentFrom: 0,
@@ -34,7 +33,7 @@ export const FormVacancy = (props: { catalogues: Array<CatalougeType> }) => {
         <h3 className={styles['form-article-title']}>Отрасль</h3>
         <MultiSelect
           className={styles['form-select']}
-          data={catalogues.map((industry) => industry.title)}
+          data={props.catalogues.map((industry) => industry.title)}
           placeholder="Выберите отрасль"
           rightSection={
             <button className={styles['form-select-btn']}>

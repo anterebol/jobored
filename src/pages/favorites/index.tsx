@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '@/hooks/hooks';
 
 const Favorits: NextPage = () => {
-  const { vacancies, token, favorites } = useAppSelector((state) => state);
+  const { vacancies, token, favoritesId } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   useEffect(() => {
     if (!token) {
@@ -20,6 +20,7 @@ const Favorits: NextPage = () => {
           token: token,
           vacanciesParams: {
             published: 1,
+            ids: favoritesId,
           },
         })
       );
@@ -29,7 +30,7 @@ const Favorits: NextPage = () => {
     <ul>
       {vacancies
         ? vacancies.map((vacancy: VacancyType) => {
-            if (favorites.includes(vacancy.id)) {
+            if (favoritesId.includes(vacancy.id)) {
               return (
                 <li key={vacancy.id}>
                   <Vacancy vacancy={vacancy} details={false} path="favorites" />

@@ -19,14 +19,12 @@ const CurrentVacancy: NextPage = () => {
 
   useEffect(() => {
     if (vacancies.length > 0) {
-      const currentVacancy = vacancies.filter((vacancy) => {
-        return vacancy.id === Number(id);
-      })[0];
+      const currentVacancy = vacancies.filter((vacancy) => vacancy.id === Number(id))[0];
       dispatch(setVacancy(currentVacancy));
     } else if (token && id) {
-      dispatch(getVacancy({ token: token, id: id, vacancyType: 'usual vacancy' }));
+      dispatch(getVacancy({ token: token, id, vacancyType: 'usual vacancy' }));
     }
-  }, [id]);
+  }, [id, token]);
 
   return (
     <>

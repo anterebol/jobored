@@ -1,21 +1,18 @@
-import { VacancyType } from '@/types/types';
+import { VacancyProps } from '@/types/types';
 import styles from './vacancy.module.css';
 import Image from 'next/image';
 import star from '@/assets/star.svg';
 import blueStar from '@/assets/blueStar.svg';
 import location from '@/assets/location.svg';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-interface VacancyProps {
-  vacancy: VacancyType;
-  path: string;
-  details: boolean;
-}
+import { useAppDispatch, useAppSelector } from '@/hooks/hooks';
+import { addFavorite, removeFavorite } from '@/store/appReducer';
+import parse from 'html-react-parser';
+
 export const Vacancy = ({ vacancy, details, path }: VacancyProps) => {
-  const [favorites, setFavorites] = useState([] as Array<string>);
-  useEffect(() => {
-    setFavorites(JSON.parse(localStorage.getItem('favorites') || '[]'));
-  }, []);
+  const { favoritesId } = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
   const [starHoverd, setStarHovered] = useState(false);
   return (
     <>
@@ -24,7 +21,7 @@ export const Vacancy = ({ vacancy, details, path }: VacancyProps) => {
           <h2 className={styles['vacancy-title']}>{vacancy.profession}</h2>
           <Image
             className={styles['vacancy-star-btn']}
-            src={starHoverd || favorites.includes(vacancy.id) ? blueStar : star}
+            src={starHoverd || favoritesId.includes(vacancy.id) ? blueStar : star}
             width={22}
             height={22}
             alt="star"
@@ -32,13 +29,11 @@ export const Vacancy = ({ vacancy, details, path }: VacancyProps) => {
             onMouseLeave={() => setStarHovered(false)}
             onClick={(e) => {
               e.preventDefault();
-              const indexId = favorites.indexOf(vacancy.id);
+              const indexId = favoritesId.indexOf(vacancy.id);
               if (indexId < 0) {
-                localStorage.setItem('favorites', JSON.stringify([...favorites, vacancy.id]));
-                setFavorites([...favorites, vacancy.id]);
+                dispatch(addFavorite(vacancy.id));
               } else {
-                localStorage.setItem('favorites', JSON.stringify(favorites.splice(indexId, 1)));
-                setFavorites(favorites.slice(indexId, 1));
+                dispatch(removeFavorite({ id: vacancy.id, indexId: indexId }));
               }
             }}
           />
@@ -56,15 +51,7 @@ export const Vacancy = ({ vacancy, details, path }: VacancyProps) => {
         </div>
       </Link>
       {details ? (
-        <div className={styles['details-box']}>
-          {vacancy.candidat.split(/\n/).map((info, i) => {
-            const regExp = new RegExp(/•/);
-            if (!regExp.test(info) && info.length < 40 && info.length > 1) {
-              return <h3 key={i + 'key'}>{info}</h3>;
-            }
-            return <p key={i + 'key'}>{info}</p>;
-          })}
-        </div>
+        <div className={styles['details-box']}>{parse(vacancy.vacancyRichText)}</div>
       ) : null}
     </>
   );

@@ -1,11 +1,12 @@
 export interface FilterVacanciesType {
-  // [key: string]: string | number | undefined;
-  keyword?: string | undefined;
-  payment_from?: number | undefined;
-  payment_to?: number | undefined;
-  catalogues?: number | undefined;
-  count?: number | undefined;
-  published?: number | undefined;
+  [key: string]: string | number | Array<number> | undefined;
+  keyword?: string;
+  payment_from?: number;
+  payment_to?: number;
+  catalogues?: number;
+  count?: number;
+  published?: number;
+  ids?: Array<number>;
 }
 export interface AuthPropsType {
   [key: string]: string | number | undefined;
@@ -25,13 +26,14 @@ export interface VacancyType {
   payment_to: string;
   payment_from: string;
   currency: string;
-  candidat: string;
+  vacancyRichText: string;
 }
 export interface CatalougeType {
   key: number;
   title: string;
 }
-export interface CatalougeType {
-  key: number;
-  title: string;
+export interface VacancyProps {
+  vacancy: VacancyType;
+  path: string;
+  details: boolean;
 }
