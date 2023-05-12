@@ -1,20 +1,22 @@
 import { getToken } from '@/store/api/api';
 import { CatalougeType } from '@/types/types';
-import { FormVacancy } from '@/components/vacancies/form/Form';
+import { FormVacancy } from '@/components/vacanciesPage/form/Form';
 import { useEffect } from 'react';
 import styles from '@/styles/Vacancies.module.css';
-import { Vacancy } from '@/components/vacancies/Vacancy';
-import { cataloguesPath } from '@/constants/path';
-import { createPath } from '@/utils/createPath';
-import { headers } from '@/constants/headers';
-import { url } from '@/constants/url';
+import { Vacancy } from '@/components/vacanciesPage/vacancy/Vacancy';
 import { useForm } from '@mantine/form';
 import { Button, TextInput } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
 import { useAppDispatch, useAppSelector } from '@/hooks/hooks';
 import { getVacancies } from '@/store/api/api';
 
-const Vacancies = ({ catalogues }: { catalogues: Array<CatalougeType> }) => {
+export const VacanciesPage = ({
+  page,
+  catalogues,
+}: {
+  page: string;
+  catalogues: Array<CatalougeType>;
+}) => {
   const { vacancies, token } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   const form = useForm({
@@ -39,6 +41,7 @@ const Vacancies = ({ catalogues }: { catalogues: Array<CatalougeType> }) => {
           vacanciesParams: {
             published: 1,
           },
+          page: Number(page),
         })
       );
     }
@@ -71,24 +74,8 @@ const Vacancies = ({ catalogues }: { catalogues: Array<CatalougeType> }) => {
             );
           })}
         </ul>
+        <div id="container"></div>
       </div>
     </div>
   );
 };
-
-export async function getServerSideProps() {
-  const path = createPath(url, cataloguesPath, undefined);
-  const response = await fetch(path, {
-    method: 'GET',
-    headers: headers,
-    redirect: 'follow',
-  });
-  const data = await response.json();
-  return {
-    props: {
-      catalogues: data,
-    },
-  };
-}
-
-export default Vacancies;

@@ -1,16 +1,12 @@
 import { getToken, getVacancy } from '@/store/api/api';
-import { Vacancy } from '@/components/vacancies/Vacancy';
-import { NextPage } from 'next';
-import { useRouter } from 'next/router';
+import { Vacancy } from '@/components/vacanciesPage/vacancy/Vacancy';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/hooks/hooks';
 import { setVacancy } from '@/store/appReducer';
 
-const CurrentVacancy: NextPage = () => {
+export const VacancyIdPage = ({ id }: { id: string }) => {
   const { token, vacancies, vacancy } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
-  const { id } = useRouter().query as { id: string };
-
   useEffect(() => {
     if (!token) {
       dispatch(getToken());
@@ -34,4 +30,3 @@ const CurrentVacancy: NextPage = () => {
     </>
   );
 };
-export default CurrentVacancy;

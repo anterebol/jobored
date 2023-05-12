@@ -1,11 +1,10 @@
 import { getToken, getVacancies } from '@/store/api/api';
-import { Vacancy } from '@/components/vacancies/Vacancy';
+import { Vacancy } from '@/components/vacanciesPage/vacancy/Vacancy';
 import { VacancyType } from '@/types/types';
-import { NextPage } from 'next';
 import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '@/hooks/hooks';
 
-const Favorits: NextPage = () => {
+export const FavoritesPage = ({ page }: { page: number }) => {
   const { vacancies, token, favoritesId } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -22,6 +21,7 @@ const Favorits: NextPage = () => {
             published: 1,
             ids: favoritesId,
           },
+          // page: page,
         })
       );
     }
@@ -42,5 +42,3 @@ const Favorits: NextPage = () => {
     </ul>
   );
 };
-
-export default Favorits;

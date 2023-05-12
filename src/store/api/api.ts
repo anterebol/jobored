@@ -33,11 +33,15 @@ export const getToken = createAsyncThunk('getToken', async (action, { rejectWith
 export const getVacancies = createAsyncThunk(
   'getVacancies',
   async (
-    { token, vacanciesParams }: { token: string; vacanciesParams: FilterVacanciesType },
+    {
+      token,
+      vacanciesParams,
+      page,
+    }: { token: string; vacanciesParams?: FilterVacanciesType; page?: number },
     { rejectWithValue }
   ) => {
     try {
-      const path = createPath(url, vacanciesPath, vacanciesParams);
+      const path = createPath(url, vacanciesPath, vacanciesParams, page);
       const response = await fetch(path, {
         method: 'GET',
         headers: {

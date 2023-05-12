@@ -10,10 +10,10 @@ export const Header: FC = () => {
       <div className={styles['header-container']}>
         <Image src={logo} width={141} height={36} alt="logo" />
         <div className={styles['header-links']}>
-          <Link href={'/vacancies'} className={styles['header-links__item']}>
+          <Link href={'/vacancies/page=1'} className={styles['header-links__item']}>
             Поиск Вакансий
           </Link>
-          <Link href={'/favorites'} className={(styles['header-links__item'], styles.left)}>
+          <Link href={'/favorites/page=1'} className={(styles['header-links__item'], styles.left)}>
             Избранное
           </Link>
         </div>

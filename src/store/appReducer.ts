@@ -10,6 +10,7 @@ const initialState = {
   favoritesId: getFavorites(),
   favorite: {} as VacancyType,
   vacancy: {} as VacancyType,
+  currentPage: 1,
 };
 
 const appSlice = createSlice({
@@ -54,7 +55,6 @@ const appSlice = createSlice({
     },
     [getVacancy.fulfilled.type]: (state, action) => {
       const { vacancy, vacancyType } = action.payload;
-      console.log(vacancy);
       if (vacancyType === 'favorite') {
         state.favorite = { ...vacancy };
       } else {

@@ -1,16 +1,14 @@
-import { Vacancy } from '@/components/vacancies/Vacancy';
+import { Vacancy } from '@/components/vacanciesPage/vacancy/Vacancy';
 import { useAppSelector, useAppDispatch } from '@/hooks/hooks';
 import { getToken, getVacancy } from '@/store/api/api';
 import { setFavorite } from '@/store/appReducer';
-import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-const Favorite: NextPage = () => {
+export const FavoriteIdPage = ({ id }: { id: string }) => {
   const { token, vacancies, favorite, favoritesId } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const { id } = router.query as { id: string };
 
   useEffect(() => {
     if (!token) {
@@ -30,7 +28,7 @@ const Favorite: NextPage = () => {
           dispatch(getVacancy({ token: token, id: id, vacancyType: 'favorite' }));
         }
       } else {
-        router.push('/favorites');
+        router.push('/favorites/page=1');
       }
     }
   }, [id, favoritesId]);
@@ -43,4 +41,3 @@ const Favorite: NextPage = () => {
     </>
   );
 };
-export default Favorite;

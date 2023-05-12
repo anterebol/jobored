@@ -4,11 +4,11 @@ export const createPath = (
   url: string,
   path: string,
   params?: FilterVacanciesType | AuthPropsType,
-  page?: string
+  page?: number
 ) => {
   let way = `${url}/${path}`;
   if (params) {
-    way += '/?';
+    way += `/?count=4&${page ? 'page=' + page + '&' : ''}`;
     const paramKeys = Object.keys(params);
     paramKeys.forEach((key) => {
       if (key !== 'ids') {
@@ -19,10 +19,9 @@ export const createPath = (
           ? ids.forEach((item: number) => {
               way += `ids[]=${item}&`;
             })
-          : (way += `&`);
+          : null;
       }
     });
-    way += '/?count=4&page=1';
   }
   return way;
 };
