@@ -8,16 +8,18 @@ import { PaginateType } from '@/types/types';
 export const Paginate = ({ pageType, page, pageCount }: PaginateType) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
+
   const handlePageClick = (event: { selected: number }) => {
     const selectedPage = event.selected + 1;
     dispatch(currentPageSet({ type: pageType, page: selectedPage }));
     router.push(`/${pageType}/page=${selectedPage}`);
   };
+
   return (
     <ReactPaginate
       breakLabel="..."
       nextLabel=">"
-      initialPage={Number(page) - 1}
+      forcePage={Number(page) - 1}
       onPageChange={handlePageClick}
       pageRangeDisplayed={3}
       pageCount={pageCount}

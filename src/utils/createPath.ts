@@ -3,10 +3,8 @@ import { FilterVacanciesType, AuthPropsType } from '@/types/types';
 export const createPath = (
   url: string,
   path: string,
-  params?: FilterVacanciesType | AuthPropsType,
-  isFavorites?: boolean
+  params?: FilterVacanciesType | AuthPropsType
 ) => {
-  console.log(isFavorites);
   let way = `${url}/${path}`;
   if (params) {
     way += `/?`;

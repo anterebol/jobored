@@ -6,22 +6,30 @@ import { useAppSelector, useAppDispatch } from '@/hooks/hooks';
 import { Paginate } from '../paginate/Paginate';
 import { Preloader } from '../preloader/Preloader';
 import { NothingFound } from '../nothingFound/NothingFound';
+import { useRouter } from 'next/router';
 
 export const FavoritesPage = ({ page }: { page: number }) => {
   const { vacancies, token, favoritesId, loaded } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   const itemsPerPage = 4;
-  const itemOffset = 1;
+  const router = useRouter();
+  const itemOffset = (page - 1) * itemsPerPage;
   const endOffset = itemOffset + itemsPerPage;
-  const currentItems = favoritesId.slice(itemOffset * page, endOffset * page);
+  const currentItems = favoritesId.slice((page - 1) * itemsPerPage, endOffset);
   const pageCount = Math.ceil(favoritesId.length / itemsPerPage);
+
+  if (currentItems.length === 0 && page > 1) {
+    router.push(`/favorites/page=${page - 1}`);
+  }
+
   useEffect(() => {
     if (!token) {
       dispatch(getToken());
     }
   }, []);
+
   useEffect(() => {
-    if (token) {
+    if (token && currentItems.length !== 0) {
       dispatch(
         getVacancies({
           token: token,
@@ -30,18 +38,18 @@ export const FavoritesPage = ({ page }: { page: number }) => {
             ids: currentItems,
             count: 4,
           },
-          isFavorites: true,
         })
       );
     }
-  }, [token, page]);
+  }, [token, favoritesId, page]);
+
   return (
     <>
       {loaded ? (
-        vacancies.length > 0 ? (
+        currentItems.length > 0 ? (
           <ul>
             {vacancies.map((vacancy: VacancyType) => {
-              if (favoritesId.includes(vacancy.id)) {
+              if (currentItems.includes(vacancy.id)) {
                 return (
                   <li key={vacancy.id}>
                     <Vacancy vacancy={vacancy} details={false} path="favorites" />

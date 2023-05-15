@@ -14,10 +14,10 @@ export const NothingFound = () => {
       <h2>Упс, здесь еще ничего нет!</h2>
       <Button
         onClick={() => {
-          router.push(`/vacancies/page=${currentPage}`);
+          router.push(`/vacancies/page=${currentPage.vacancies}`);
         }}
-        variant="gradient"
-        gradient={{ from: 'teal', to: 'lime', deg: 105 }}
+        variant="light"
+        color="indigo"
       >
         Поиск Вакансий
       </Button>

@@ -55,7 +55,6 @@ const appSlice = createSlice({
       localStorage.setItem('token', '');
     },
     [getVacancies.fulfilled.type]: (state, action) => {
-      console.log(action.payload);
       state.loaded = true;
       state.vacancies = [...action.payload];
     },
@@ -63,7 +62,6 @@ const appSlice = createSlice({
       state.loaded = false;
     },
     [getVacancies.rejected.type]: (state) => {
-      console.log(action.payload);
       state.loaded = true;
       localStorage.setItem('token', '');
     },
