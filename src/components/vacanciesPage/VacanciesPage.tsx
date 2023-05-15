@@ -2,13 +2,15 @@ import { getToken } from '@/store/api/api';
 import { CatalougeType } from '@/types/types';
 import { FormVacancy } from '@/components/vacanciesPage/form/Form';
 import { useEffect } from 'react';
-import styles from '@/styles/Vacancies.module.css';
+import styles from './vacanciesPage.module.css';
 import { Vacancy } from '@/components/vacanciesPage/vacancy/Vacancy';
 import { useForm } from '@mantine/form';
 import { Button, TextInput } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
 import { useAppDispatch, useAppSelector } from '@/hooks/hooks';
 import { getVacancies } from '@/store/api/api';
+import { Preloader } from '../preloader/Preloader';
+import { Paginate } from '../paginate/Paginate';
 
 export const VacanciesPage = ({
   page,
@@ -17,8 +19,10 @@ export const VacanciesPage = ({
   page: string;
   catalogues: Array<CatalougeType>;
 }) => {
-  const { vacancies, token } = useAppSelector((state) => state);
+  const { vacancies, token, loaded } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
+  const pageCount = 125;
+
   const form = useForm({
     initialValues: {
       searchVacancy: '',
@@ -40,12 +44,13 @@ export const VacanciesPage = ({
           token: token,
           vacanciesParams: {
             published: 1,
+            page: Number(page),
+            count: 4,
           },
-          page: Number(page),
         })
       );
     }
-  }, [token]);
+  }, [token, page]);
   return (
     <div className={styles['vacancies-page']}>
       <div className={styles['left-bar']}>
@@ -65,16 +70,20 @@ export const VacanciesPage = ({
             rightSection={<Button className={styles['search-vacancy-form__button']}>Поиск</Button>}
           />
         </form>
-        <ul>
-          {vacancies.map((vacancy) => {
-            return (
-              <li key={vacancy.id}>
-                <Vacancy vacancy={vacancy} details={false} path="vacancies" />
-              </li>
-            );
-          })}
-        </ul>
-        <div id="container"></div>
+        {loaded ? (
+          <ul>
+            {vacancies.map((vacancy) => {
+              return (
+                <li key={vacancy.id}>
+                  <Vacancy vacancy={vacancy} details={false} path="vacancies" />
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <Preloader />
+        )}
+        <Paginate pageType={'vacancies'} page={Number(page)} pageCount={pageCount} />
       </div>
     </div>
   );

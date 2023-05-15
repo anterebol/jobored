@@ -4,11 +4,12 @@ export const createPath = (
   url: string,
   path: string,
   params?: FilterVacanciesType | AuthPropsType,
-  page?: number
+  isFavorites?: boolean
 ) => {
+  console.log(isFavorites);
   let way = `${url}/${path}`;
   if (params) {
-    way += `/?count=4&${page ? 'page=' + page + '&' : ''}`;
+    way += `/?`;
     const paramKeys = Object.keys(params);
     paramKeys.forEach((key) => {
       if (key !== 'ids') {

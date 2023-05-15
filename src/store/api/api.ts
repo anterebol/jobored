@@ -36,12 +36,19 @@ export const getVacancies = createAsyncThunk(
     {
       token,
       vacanciesParams,
-      page,
-    }: { token: string; vacanciesParams?: FilterVacanciesType; page?: number },
+      isFavorites,
+    }: {
+      token: string;
+      vacanciesParams?: FilterVacanciesType;
+      page?: number;
+      isFavorites?: boolean;
+    },
     { rejectWithValue }
   ) => {
     try {
-      const path = createPath(url, vacanciesPath, vacanciesParams, page);
+      const path = createPath(url, vacanciesPath, vacanciesParams, isFavorites);
+      console.log(path);
+      if (!path) return [];
       const response = await fetch(path, {
         method: 'GET',
         headers: {

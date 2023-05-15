@@ -12,7 +12,7 @@ const Vacancies = ({ catalogues }: { catalogues: Array<CatalougeType> }) => {
   const queryProps = query.split('=');
   return (
     <>
-      {queryProps[0].includes('page') ? (
+      {queryProps[0] === 'page' ? (
         <VacanciesPage page={queryProps[1]} catalogues={catalogues} />
       ) : (
         <VacancyIdPage id={queryProps[1]} />

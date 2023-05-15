@@ -37,3 +37,8 @@ export interface VacancyProps {
   path: string;
   details: boolean;
 }
+export interface PaginateType {
+  pageType: string;
+  page: number;
+  pageCount: number;
+}

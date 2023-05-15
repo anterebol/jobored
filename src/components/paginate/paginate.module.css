@@ -1,0 +1,44 @@
+.pagination {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 44px;
+  margin-top: 40px;
+}
+.page-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: white;
+  border: 1px solid #D5D6DC;
+  border-radius: 4px;
+  font-family: 'Roboto';
+  color: #232134;
+  font-weight: 400;
+  font-size: 16px;
+  padding: 0px 8px;
+  transition: ease-in .3s;
+}
+.page-num a {
+  line-height: 140%;
+}
+.page-num:hover {
+  background: #5E96FC;
+  opacity: .7;
+  color: white;
+  cursor: pointer;
+}
+.active{
+  background: #5E96FC;
+  color: white;
+}
+.disabled > a {
+  opacity: .5 !important;
+  background: ghostwhite !important;
+  cursor: default !important;
+  color: black !important;
+}

@@ -3,9 +3,10 @@ import { Vacancy } from '@/components/vacanciesPage/vacancy/Vacancy';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/hooks/hooks';
 import { setVacancy } from '@/store/appReducer';
+import { Preloader } from '../preloader/Preloader';
 
 export const VacancyIdPage = ({ id }: { id: string }) => {
-  const { token, vacancies, vacancy } = useAppSelector((state) => state);
+  const { token, vacancies, vacancy, loaded } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   useEffect(() => {
     if (!token) {
@@ -24,9 +25,9 @@ export const VacancyIdPage = ({ id }: { id: string }) => {
 
   return (
     <>
-      {Object.keys(vacancy).length > 0 ? (
+      {loaded ? Object.keys(vacancy).length > 0 ? (
         <Vacancy vacancy={vacancy} details={true} path="vacancies" />
-      ) : null}
+      ) : null : <Preloader />}
     </>
   );
 };

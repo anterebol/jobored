@@ -4,9 +4,10 @@ import { getToken, getVacancy } from '@/store/api/api';
 import { setFavorite } from '@/store/appReducer';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import { Preloader } from '../preloader/Preloader';
 
 export const FavoriteIdPage = ({ id }: { id: string }) => {
-  const { token, vacancies, favorite, favoritesId } = useAppSelector((state) => state);
+  const { token, vacancies, favorite, favoritesId, loaded } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -35,9 +36,13 @@ export const FavoriteIdPage = ({ id }: { id: string }) => {
 
   return (
     <>
-      {Object.keys(favorite).length > 0 ? (
-        <Vacancy vacancy={favorite} details={true} path="vacancies" />
-      ) : null}
+      {loaded ? (
+        Object.keys(favorite).length > 0 ? (
+          <Vacancy vacancy={favorite} details={true} path="vacancies" />
+        ) : null
+      ) : (
+        <Preloader />
+      )}
     </>
   );
 };
