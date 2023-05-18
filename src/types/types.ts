@@ -1,15 +1,19 @@
-export interface FilterVacanciesType {
-  [key: string]: string | number | Array<number> | undefined;
+export type FilterVacanciesType = {
+  [key: string]: any;
   keyword?: string;
-  payment_from?: number;
-  payment_to?: number;
-  catalogues?: number;
+  payment_from?: number | string;
+  payment_to?: number | string;
   count?: number;
   published?: number;
   ids?: Array<number>;
+  catalogues?: Array<string>;
+};
+export interface FilterComponentType {
+  cataloguesProps: Array<CatalougeType>;
+  submit: (data: FormType) => void;
 }
 export interface AuthPropsType {
-  [key: string]: string | number | undefined;
+  [key: string]: any;
   login: string;
   password: string;
   client_id: number;
@@ -29,6 +33,7 @@ export interface VacancyType {
   vacancyRichText: string;
 }
 export interface CatalougeType {
+  [key: string]: any;
   key: number;
   title: string;
 }
@@ -41,4 +46,11 @@ export interface PaginateType {
   pageType: string;
   page: number;
   pageCount: number;
+}
+export interface FormType {
+  [key: string]: any;
+  payment_from?: number | string;
+  payment_to?: number | string;
+  catalogues?: Array<string>;
+  keyWord?: string;
 }

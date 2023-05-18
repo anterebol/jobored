@@ -1,4 +1,4 @@
-import { FilterVacanciesType, AuthPropsType } from '@/types/types';
+import { FilterVacanciesType, AuthPropsType, FormType } from '@/types/types';
 
 export const createPath = (
   url: string,
@@ -10,15 +10,15 @@ export const createPath = (
     way += `/?`;
     const paramKeys = Object.keys(params);
     paramKeys.forEach((key) => {
-      if (key !== 'ids') {
-        way += `${key}=${params[key]}&`;
-      } else {
-        const { ids } = params;
-        Array.isArray(ids)
-          ? ids.forEach((item: number) => {
-              way += `ids[]=${item}&`;
+      if (Array.isArray(params[key])) {
+        const props = params[key];
+        Array.isArray(props)
+          ? props.forEach((item: number) => {
+              way += `${key}[]=${item}&`;
             })
           : null;
+      } else if (params[key]) {
+        way += `${key}=${params[key]}&`;
       }
     });
   }

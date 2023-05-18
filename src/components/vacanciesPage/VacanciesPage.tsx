@@ -1,16 +1,15 @@
 import { getToken } from '@/store/api/api';
-import { CatalougeType } from '@/types/types';
-import { FormVacancy } from '@/components/vacanciesPage/form/Form';
+import { CatalougeType, FormType } from '@/types/types';
+import { Filter } from '@/components/vacanciesPage/forms/filter/Filter';
 import { useEffect } from 'react';
 import styles from './vacanciesPage.module.css';
 import { Vacancy } from '@/components/vacanciesPage/vacancy/Vacancy';
-import { useForm } from '@mantine/form';
-import { Button, TextInput } from '@mantine/core';
-import { IconSearch } from '@tabler/icons-react';
 import { useAppDispatch, useAppSelector } from '@/hooks/hooks';
 import { getVacancies } from '@/store/api/api';
 import { Preloader } from '../preloader/Preloader';
 import { Paginate } from '../paginate/Paginate';
+import { KeyWordForm } from './forms/keywordForm/KeywordForm';
+import { setForm } from '@/store/appReducer';
 
 export const VacanciesPage = ({
   page,
@@ -19,57 +18,53 @@ export const VacanciesPage = ({
   page: string;
   catalogues: Array<CatalougeType>;
 }) => {
-  const { vacancies, token, loaded } = useAppSelector((state) => state);
+  const { vacancies, token, loaded, formState } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   const pageCount = 125;
+  const vacanciesParams = {
+    // ...formState,
+    published: 1,
+    page: Number(page),
+    count: 4,
+  };
 
-  const form = useForm({
-    initialValues: {
-      searchVacancy: '',
-    },
-
-    validate: {
-      searchVacancy: (value) => (value ? null : 'Введите текст'),
-    },
-  });
   useEffect(() => {
     if (!token) {
       dispatch(getToken());
     }
   }, []);
-  useEffect(() => {
+
+  const _getVacancies = (data: FormType) => {
+    console.log(data);
+    dispatch(setForm(data));
     if (token) {
       dispatch(
         getVacancies({
           token: token,
           vacanciesParams: {
-            published: 1,
-            page: Number(page),
-            count: 4,
+            ...vacanciesParams,
+            ...data,
+            // no_agreement: 1,
           },
         })
       );
     }
+  };
+
+  useEffect(() => {
+    _getVacancies({
+      ...formState,
+      // ...vacanciesParams,
+    });
   }, [token, page]);
+
   return (
     <div className={styles['vacancies-page']}>
       <div className={styles['left-bar']}>
-        <FormVacancy catalogues={catalogues} />
+        <Filter submit={_getVacancies} cataloguesProps={catalogues} />
       </div>
       <div className={styles['right-bar']}>
-        <form
-          className={styles['search-vacancy-form']}
-          onSubmit={form.onSubmit((values) => console.log(values))}
-        >
-          <TextInput
-            style={{}}
-            size="lg"
-            width={1000}
-            placeholder="Введите название вакансии"
-            icon={<IconSearch size="0.8rem" />}
-            rightSection={<Button className={styles['search-vacancy-form__button']}>Поиск</Button>}
-          />
-        </form>
+        <KeyWordForm />
         {loaded ? (
           <ul>
             {vacancies.map((vacancy) => {

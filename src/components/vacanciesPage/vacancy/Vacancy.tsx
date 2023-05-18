@@ -39,7 +39,12 @@ export const Vacancy = ({ vacancy, details, path }: VacancyProps) => {
           />
           <div className={styles['vacancy-info']}>
             <p className={styles['vacancy-salary']}>
-              з/п {vacancy.payment_from} {vacancy.currency}
+              з/п{' '}
+              {vacancy.payment_from
+                ? `от ${vacancy.payment_from}`
+                : vacancy.payment_to
+                ? `до ${vacancy.payment_to}`
+                : 'не указана'}
             </p>
             <p className={styles['vacancy-info-point']}>•</p>
             <p className={styles['vacancy-type']}>{vacancy.type_of_work.title}</p>

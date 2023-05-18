@@ -8,6 +8,7 @@ import { Preloader } from '../preloader/Preloader';
 export const VacancyIdPage = ({ id }: { id: string }) => {
   const { token, vacancies, vacancy, loaded } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     if (!token) {
       dispatch(getToken());
@@ -25,9 +26,13 @@ export const VacancyIdPage = ({ id }: { id: string }) => {
 
   return (
     <>
-      {loaded ? Object.keys(vacancy).length > 0 ? (
-        <Vacancy vacancy={vacancy} details={true} path="vacancies" />
-      ) : null : <Preloader />}
+      {loaded ? (
+        Object.keys(vacancy).length > 0 ? (
+          <Vacancy vacancy={vacancy} details={true} path="vacancies" />
+        ) : null
+      ) : (
+        <Preloader />
+      )}
     </>
   );
 };

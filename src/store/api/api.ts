@@ -2,7 +2,7 @@ import { authProps } from '@/constants/authProps';
 import { headers } from '@/constants/headers';
 import { authPath, cataloguesPath, vacanciesPath } from '@/constants/path';
 import { url } from '@/constants/url';
-import { FilterVacanciesType } from '@/types/types';
+import { FilterVacanciesType, FormType } from '@/types/types';
 import { createPath } from '@/utils/createPath';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
@@ -39,12 +39,13 @@ export const getVacancies = createAsyncThunk(
     }: {
       token: string;
       vacanciesParams?: FilterVacanciesType;
-      page?: number;
     },
     { rejectWithValue }
   ) => {
+    console.log(vacanciesParams);
     try {
       const path = createPath(url, vacanciesPath, vacanciesParams);
+      console.log(path);
       if (!path) return [];
       const response = await fetch(path, {
         method: 'GET',

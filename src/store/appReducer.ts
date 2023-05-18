@@ -1,7 +1,8 @@
-import { VacancyType } from './../types/types';
+import { FormType, VacancyType } from './../types/types';
 import { createSlice } from '@reduxjs/toolkit';
 import { getToken, getVacancies, getVacancy } from './api/api';
 import { getFavorites } from '@/utils/getFavorites';
+import { initialFormValues } from '@/constants/initialFormValues';
 
 const initialState = {
   vacancies: [] as Array<VacancyType>,
@@ -14,6 +15,7 @@ const initialState = {
     favorites: 1,
     vacancies: 1,
   },
+  formState: { ...initialFormValues },
 };
 
 const appSlice = createSlice({
@@ -21,6 +23,7 @@ const appSlice = createSlice({
   initialState: { ...initialState },
   reducers: {
     setVacancy: (state, action) => {
+      console.log(action.payload);
       state.vacancy = { ...action.payload };
     },
     setFavorite: (state, action) => {
@@ -45,6 +48,10 @@ const appSlice = createSlice({
         state.currentPage = { ...state.currentPage, favorites: page };
       }
     },
+    setForm: (state, action) => {
+      console.log(action.payload);
+      state.formState = { ...state.formState, ...action.payload };
+    },
   },
   extraReducers: {
     [getToken.fulfilled.type]: (state, action) => {
@@ -56,6 +63,7 @@ const appSlice = createSlice({
     },
     [getVacancies.fulfilled.type]: (state, action) => {
       state.loaded = true;
+      console.log(action.payload);
       state.vacancies = [...action.payload];
     },
     [getVacancies.pending.type]: (state) => {
@@ -83,6 +91,6 @@ const appSlice = createSlice({
     },
   },
 });
-export const { setVacancy, setFavorite, addFavorite, removeFavorite, currentPageSet } =
+export const { setVacancy, setFavorite, addFavorite, removeFavorite, currentPageSet, setForm } =
   appSlice.actions;
 export default appSlice.reducer;
