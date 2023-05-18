@@ -7,5 +7,5 @@ export const initialFilterValues = {
 };
 export const initialFormValues = {
   ...initialFilterValues,
-  keyWord: '',
+  keyword: '',
 } as FormType;

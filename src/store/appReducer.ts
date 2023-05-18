@@ -51,6 +51,7 @@ const appSlice = createSlice({
     setForm: (state, action) => {
       console.log(action.payload);
       state.formState = { ...state.formState, ...action.payload };
+      console.log(state.formState);
     },
   },
   extraReducers: {

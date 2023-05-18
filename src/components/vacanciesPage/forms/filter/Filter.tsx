@@ -34,10 +34,10 @@ export const Filter = ({ cataloguesProps, submit }: FilterComponentType) => {
     },
   });
 
-  const setPaymentTo = (value: number) => {
+  const _setPaymentTo = (value: number) => {
     form.setValues({ payment_to: value });
   };
-  const setPaymentFrom = (value: number) => {
+  const _setPaymentFrom = (value: number) => {
     form.setValues({ payment_from: value });
   };
   const getPayment = (payment: number | string) => Number(payment ? payment : 0);
@@ -67,6 +67,7 @@ export const Filter = ({ cataloguesProps, submit }: FilterComponentType) => {
             onClick={() => {
               form.setValues({ ...initialFilterValues });
               dispatch(setForm({ ...initialFilterValues }));
+              submit({ ...initialFilterValues });
             }}
           >
             Сбросить все <Image src={iconX} alt={'X'} />
@@ -97,14 +98,14 @@ export const Filter = ({ cataloguesProps, submit }: FilterComponentType) => {
               <button
                 type="button"
                 onClick={() => {
-                  setPaymentFrom(getPayment(form.values.payment_from) + step);
+                  _setPaymentFrom(getPayment(form.values.payment_from) + step);
                 }}
               >
                 <IconChevronUp width={12} height={12} style={{ display: 'block' }} />
               </button>
               <button
                 type="button"
-                onClick={() => setPaymentFrom(getPayment(form.values.payment_from) - step)}
+                onClick={() => _setPaymentFrom(getPayment(form.values.payment_from) - step)}
               >
                 <IconChevronDown width={12} height={12} style={{ display: 'block' }} />
               </button>
@@ -119,13 +120,13 @@ export const Filter = ({ cataloguesProps, submit }: FilterComponentType) => {
             <div className={styles['form-buttons-salary']}>
               <button
                 type="button"
-                onClick={() => setPaymentTo(getPayment(form.values.payment_to) + step)}
+                onClick={() => _setPaymentTo(getPayment(form.values.payment_to) + step)}
               >
                 <IconChevronUp width={12} height={12} style={{ display: 'block' }} />
               </button>
               <button
                 type="button"
-                onClick={() => setPaymentTo(getPayment(form.values.payment_to) - step)}
+                onClick={() => _setPaymentTo(getPayment(form.values.payment_to) - step)}
               >
                 <IconChevronDown width={12} height={12} style={{ display: 'block' }} />
               </button>

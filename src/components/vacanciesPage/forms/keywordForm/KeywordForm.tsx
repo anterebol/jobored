@@ -4,36 +4,45 @@ import { IconSearch } from '@tabler/icons-react';
 import styles from './keywordForm.module.css';
 import { useAppDispatch, useAppSelector } from '@/hooks/hooks';
 import { setForm } from '@/store/appReducer';
+import { FormType } from '@/types/types';
 
-export const KeyWordForm = () => {
-  const { formState } = useAppSelector((state) => state);
+export const KeyWordForm = ({ submit }: { submit: (data: FormType) => void }) => {
+  const { keyword } = useAppSelector((state) => state.formState);
   const dispatch = useAppDispatch();
   const form = useForm({
     initialValues: {
-      vacancyName: formState.vacancyName,
+      keyword: decodeURI(keyword),
     },
 
     validate: {
-      vacancyName: (value) => (value ? null : 'Введите текст'),
+      keyword: (value) => {
+        console.log(value);
+        return value ? null : 'Введите текст';
+      },
     },
   });
-  const setVacancyName = (vacancyName: string) => {
-    form.setValues({ vacancyName: vacancyName });
-  };
 
   return (
     <form
+      id="keyword"
       className={styles['search-vacancy-form']}
-      onSubmit={form.onSubmit((values) => dispatch(setForm(values)))}
+      onSubmit={form.onSubmit((values) => {
+        const keyword = { keyword: encodeURI(values.keyword) };
+        dispatch(setForm({ ...keyword }));
+        submit({ ...keyword });
+      })}
     >
       <TextInput
         size="lg"
-        value={form.values.vacancyName}
-        onInput={(event: any) => setVacancyName(event.target.value)}
+        {...form.getInputProps('keyword')}
         width={1000}
         placeholder="Введите название вакансии"
         icon={<IconSearch size="0.8rem" />}
-        rightSection={<Button className={styles['search-vacancy-form__button']}>Поиск</Button>}
+        rightSection={
+          <Button form="keyword" className={styles['search-vacancy-form__button']}>
+            Поиск
+          </Button>
+        }
       />
     </form>
   );

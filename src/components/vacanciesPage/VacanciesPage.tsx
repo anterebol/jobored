@@ -35,7 +35,6 @@ export const VacanciesPage = ({
   }, []);
 
   const _getVacancies = (data: FormType) => {
-    console.log(data);
     dispatch(setForm(data));
     if (token) {
       dispatch(
@@ -43,6 +42,7 @@ export const VacanciesPage = ({
           token: token,
           vacanciesParams: {
             ...vacanciesParams,
+            ...formState,
             ...data,
             // no_agreement: 1,
           },
@@ -64,7 +64,7 @@ export const VacanciesPage = ({
         <Filter submit={_getVacancies} cataloguesProps={catalogues} />
       </div>
       <div className={styles['right-bar']}>
-        <KeyWordForm />
+        <KeyWordForm submit={_getVacancies} />
         {loaded ? (
           <ul>
             {vacancies.map((vacancy) => {
