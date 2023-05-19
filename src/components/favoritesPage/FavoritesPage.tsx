@@ -1,5 +1,5 @@
 import { getToken, getVacancies } from '@/store/api/api';
-import { Vacancy } from '@/components/vacanciesPage/vacancy/Vacancy';
+import { Vacancy } from '@/components/vacancy/Vacancy';
 import { VacancyType } from '@/types/types';
 import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '@/hooks/hooks';
@@ -7,11 +7,11 @@ import { Paginate } from '../paginate/Paginate';
 import { Preloader } from '../preloader/Preloader';
 import { NothingFound } from '../nothingFound/NothingFound';
 import { useRouter } from 'next/router';
+import { itemsPerPage } from '@/constants/default/default';
 
 export const FavoritesPage = ({ page }: { page: number }) => {
   const { vacancies, token, favoritesId, loaded } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
-  const itemsPerPage = 4;
   const router = useRouter();
   const itemOffset = (page - 1) * itemsPerPage;
   const endOffset = itemOffset + itemsPerPage;
@@ -52,7 +52,7 @@ export const FavoritesPage = ({ page }: { page: number }) => {
               if (currentItems.includes(vacancy.id)) {
                 return (
                   <li key={vacancy.id}>
-                    <Vacancy vacancy={vacancy} details={false} path="favorites" />
+                    <Vacancy vacancy={vacancy} details={false} path="vacancy" />
                   </li>
                 );
               }

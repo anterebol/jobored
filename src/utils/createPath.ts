@@ -5,22 +5,22 @@ export const createPath = (
   path: string,
   params?: FilterVacanciesType | AuthPropsType
 ) => {
-  let way = `${url}/${path}`;
+  let query = `${url}/${path}`;
   if (params) {
-    way += `/?`;
+    query += `/?`;
     const paramKeys = Object.keys(params);
     paramKeys.forEach((key) => {
       if (Array.isArray(params[key])) {
         const props = params[key];
         Array.isArray(props)
           ? props.forEach((item: number) => {
-              way += `${key}[]=${item}&`;
+              query += `${key}[]=${item}&`;
             })
           : null;
       } else if (params[key]) {
-        way += `${key}=${params[key]}&`;
+        query += `${key}=${params[key]}&`;
       }
     });
   }
-  return way;
+  return query;
 };

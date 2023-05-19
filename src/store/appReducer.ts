@@ -2,7 +2,7 @@ import { FormType, VacancyType } from './../types/types';
 import { createSlice } from '@reduxjs/toolkit';
 import { getToken, getVacancies, getVacancy } from './api/api';
 import { getFavorites } from '@/utils/getFavorites';
-import { initialFormValues } from '@/constants/initialFormValues';
+import { initialFormValues } from '@/constants/default/initialFormValues';
 
 const initialState = {
   vacancies: [] as Array<VacancyType>,
@@ -63,9 +63,8 @@ const appSlice = createSlice({
       localStorage.setItem('token', '');
     },
     [getVacancies.fulfilled.type]: (state, action) => {
-      state.loaded = true;
-      console.log(action.payload);
       state.vacancies = [...action.payload];
+      state.loaded = true;
     },
     [getVacancies.pending.type]: (state) => {
       state.loaded = false;

@@ -13,13 +13,6 @@ export const KeyWordForm = ({ submit }: { submit: (data: FormType) => void }) =>
     initialValues: {
       keyword: decodeURI(keyword),
     },
-
-    validate: {
-      keyword: (value) => {
-        console.log(value);
-        return value ? null : 'Введите текст';
-      },
-    },
   });
 
   return (
@@ -39,7 +32,7 @@ export const KeyWordForm = ({ submit }: { submit: (data: FormType) => void }) =>
         placeholder="Введите название вакансии"
         icon={<IconSearch size="0.8rem" />}
         rightSection={
-          <Button form="keyword" className={styles['search-vacancy-form__button']}>
+          <Button type="submit" className={styles['search-vacancy-form__button']}>
             Поиск
           </Button>
         }

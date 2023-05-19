@@ -54,3 +54,9 @@ export interface FormType {
   catalogues?: Array<string>;
   keyWord?: string;
 }
+export interface DecodintType {
+  currentCatalogue: Array<string>;
+  fullCatalogue: Array<CatalougeType>;
+  from: string;
+  to: string;
+}

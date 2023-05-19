@@ -16,7 +16,7 @@ export const Vacancy = ({ vacancy, details, path }: VacancyProps) => {
   const [starHoverd, setStarHovered] = useState(false);
   return (
     <>
-      <Link href={`/${path}/id=${vacancy.id}`}>
+      <Link href={`/${path}/${vacancy.id}`}>
         <div className={[styles['vacancy-box'], details ? '' : styles['undetails']].join(' ')}>
           <h2 className={styles['vacancy-title']}>{vacancy.profession}</h2>
           <Image

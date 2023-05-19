@@ -1,8 +1,8 @@
 import { authProps } from '@/constants/authProps';
-import { headers } from '@/constants/headers';
-import { authPath, cataloguesPath, vacanciesPath } from '@/constants/path';
-import { url } from '@/constants/url';
-import { FilterVacanciesType, FormType } from '@/types/types';
+import { headers } from '@/constants/query/headers';
+import { AUTH_PATH, CATALOGUES_PATH, VACANCIES_PATH } from '@/constants/query/path';
+import { URL } from '@/constants/query/url';
+import { FilterVacanciesType } from '@/types/types';
 import { createPath } from '@/utils/createPath';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
@@ -10,7 +10,7 @@ export const getToken = createAsyncThunk('getToken', async (action, { rejectWith
   let token = localStorage.getItem('token');
   if (token) return token;
   try {
-    const path = createPath(url, authPath, authProps);
+    const path = createPath(URL, AUTH_PATH, authProps);
     const response = await fetch(path, {
       method: 'GET',
       headers: headers,
@@ -44,7 +44,7 @@ export const getVacancies = createAsyncThunk(
   ) => {
     console.log(vacanciesParams);
     try {
-      const path = createPath(url, vacanciesPath, vacanciesParams);
+      const path = createPath(URL, VACANCIES_PATH, vacanciesParams);
       console.log(path);
       if (!path) return [];
       const response = await fetch(path, {
@@ -74,7 +74,7 @@ export const getVacancy = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const path = createPath(url, vacanciesPath + `/${id}`, undefined);
+      const path = createPath(URL, VACANCIES_PATH + `/${id}`, undefined);
       const response = await fetch(path, {
         method: 'GET',
         headers: {
@@ -96,7 +96,7 @@ export const getVacancy = createAsyncThunk(
 );
 
 export const getCatalouge = async () => {
-  const path = createPath(url, cataloguesPath, undefined);
+  const path = createPath(URL, CATALOGUES_PATH, undefined);
   const response = await fetch(path, {
     method: 'GET',
     headers: headers,

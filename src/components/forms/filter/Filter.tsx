@@ -10,8 +10,8 @@ import { useAppDispatch, useAppSelector } from '@/hooks/hooks';
 import { setForm } from '@/store/appReducer';
 import { validatePaymentFrom, validatePaymentTo } from '@/utils/validation';
 import { decodingCatalogue } from '@/utils/catalogueDecoding';
-import { step } from '@/constants/step';
-import { initialFilterValues } from '@/constants/initialFormValues';
+import { step } from '@/constants/default/default';
+import { initialFilterValues } from '@/constants/default/initialFormValues';
 
 export const Filter = ({ cataloguesProps, submit }: FilterComponentType) => {
   const { payment_from, payment_to, catalogues } = useAppSelector((state) => state.formState);
