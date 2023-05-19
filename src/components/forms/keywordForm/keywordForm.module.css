@@ -1,5 +1,8 @@
 .search-vacancy-form {
-  min-width: 100%;
+  /* min-width: 100%; */
+  justify-content: center;
+  /* padding: 10px; */
+  margin: 0 5px;
 }
 .search-vacancy-form__button {
   position: relative;
@@ -8,4 +11,25 @@
   line-height: 21px;
   padding: 4px 20px;
   border-radius: 8px;
+}
+.search-vacancy-form__button.hiden {
+  position:relative;
+  display: none;
+  width: 100%;
+  right: 0;
+  /* min-width: 275px; */
+  margin: 0 auto;
+  margin-top: 10px;
+}
+@media (max-width: 500px) {
+  .search-vacancy-form > div{
+    /* max-width: 275px !important; */
+    /* margin: 0 5px; */
+  }
+  .search-vacancy-form__button {
+    display: none;
+  }
+  .search-vacancy-form__button.hiden {
+    display: block;
+  }
 }

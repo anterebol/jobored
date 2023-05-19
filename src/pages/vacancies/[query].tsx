@@ -20,12 +20,12 @@ import { ListVacancies } from '@/components/vacanciesList/VacanciesList';
 import { NothingFound } from '@/components/nothingFound/NothingFound';
 
 export const Vacancies = ({ catalogues }: { catalogues: Array<CatalougeType> }) => {
+  const { vacancies, token, loaded, formState } = useAppSelector((state) => state);
   const { query } = useRouter().query as { query: string };
   const { page } = parseQuery(query);
-  const { vacancies, token, loaded, formState } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
+
   const vacanciesParams = {
-    // ...formState,
     published: 1,
     page: Number(page),
     count: itemsPerPage,
@@ -71,7 +71,7 @@ export const Vacancies = ({ catalogues }: { catalogues: Array<CatalougeType> }) 
             <ListVacancies vacancies={vacancies} />
           ) : (
             <div className={styles['empty-state']}>
-              <NothingFound />
+              <NothingFound isFavoritesPage={false} />
             </div>
           )
         ) : (

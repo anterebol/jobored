@@ -16,27 +16,33 @@ export const KeyWordForm = ({ submit }: { submit: (data: FormType) => void }) =>
   });
 
   return (
-    <form
-      id="keyword"
-      className={styles['search-vacancy-form']}
-      onSubmit={form.onSubmit((values) => {
-        const keyword = { keyword: encodeURI(values.keyword) };
-        dispatch(setForm({ ...keyword }));
-        submit({ ...keyword });
-      })}
-    >
-      <TextInput
-        size="lg"
-        {...form.getInputProps('keyword')}
-        width={1000}
-        placeholder="Введите название вакансии"
-        icon={<IconSearch size="0.8rem" />}
-        rightSection={
-          <Button type="submit" className={styles['search-vacancy-form__button']}>
-            Поиск
-          </Button>
-        }
-      />
-    </form>
+    <>
+      <form
+        className={styles['search-vacancy-form']}
+        onSubmit={form.onSubmit((values) => {
+          const keyword = { keyword: encodeURI(values.keyword) };
+          dispatch(setForm({ ...keyword }));
+          submit({ ...keyword });
+        })}
+      >
+        <TextInput
+          size="lg"
+          {...form.getInputProps('keyword')}
+          placeholder="Введите название вакансии"
+          icon={<IconSearch size="0.8rem" />}
+          rightSection={
+            <Button type="submit" className={styles['search-vacancy-form__button']}>
+              Поиск
+            </Button>
+          }
+        />
+        <Button
+          type="submit"
+          className={[styles['search-vacancy-form__button'], styles['hiden']].join(' ')}
+        >
+          Поиск
+        </Button>
+      </form>
+    </>
   );
 };

@@ -17,7 +17,9 @@ export const Vacancy = ({ vacancy, details, path }: VacancyProps) => {
   return (
     <>
       <Link href={`/${path}/${vacancy.id}`}>
-        <div className={[styles['vacancy-box'], details ? '' : styles['undetails']].join(' ')}>
+        <div
+          className={[styles['vacancy-box'], details ? 'details' : styles['undetails']].join(' ')}
+        >
           <h2 className={styles['vacancy-title']}>{vacancy.profession}</h2>
           <Image
             className={styles['vacancy-star-btn']}
