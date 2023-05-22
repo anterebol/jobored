@@ -92,14 +92,3 @@ export const getVacancy = createAsyncThunk(
     }
   }
 );
-
-export const getCatalouge = async () => {
-  const path = createPath(URL, CATALOGUES_PATH, undefined);
-  const response = await fetch(path, {
-    method: 'GET',
-    headers: headers,
-    redirect: 'follow',
-  });
-  const data = await response.json();
-  return data;
-};

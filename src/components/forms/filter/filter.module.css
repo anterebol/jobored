@@ -2,6 +2,7 @@
   padding: 20px;
   background: white;
   min-width: 275px;
+  max-width: 275px;
   width: 100%;
 }
 .form-head {
@@ -70,4 +71,9 @@
 }
 .form-submit-button:hover {
   background: #508af6;
+}
+@media (max-width: 800px) {
+  .form-box {
+    max-width: 100%;
+  }
 }

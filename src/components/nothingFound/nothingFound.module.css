@@ -15,7 +15,7 @@
   line-height: 29px;
 }
 @media (max-width: 800px) {
-  .nothing-found {
+  .nothing-found.is-vacancies {
     position: relative;
     gap: 0;
     display: block;

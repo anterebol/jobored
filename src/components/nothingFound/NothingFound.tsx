@@ -11,7 +11,9 @@ export const NothingFound = ({ isFavoritesPage }: { isFavoritesPage: boolean }) 
   const router = useRouter();
   return (
     <div
-      className={[styles['nothing-found'], isFavoritesPage ? styles['is-vacancies'] : ''].join(' ')}
+      className={[styles['nothing-found'], !isFavoritesPage ? styles['is-vacancies'] : ''].join(
+        ' '
+      )}
     >
       <Image src={nothingFound} alt={'nothing-found'} />
       <h2>Упс, здесь еще ничего нет!</h2>
