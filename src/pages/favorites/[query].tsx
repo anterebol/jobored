@@ -49,7 +49,7 @@ export const Favorites = () => {
 
   return (
     <>
-      {loaded ? (
+      {loaded || currentItems.length === 0 ? (
         currentItems.length > 0 ? (
           <>
             <ul>

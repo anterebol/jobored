@@ -6,13 +6,18 @@
 }
 .header-container {
   margin: 0 10%;
-  /* min-width: 50%; */
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
 }
 .header-links {
   margin-left: 280px;
+}
+.header-links__item {
+  transition: ease-in .2s;
+}
+.header-links__item:hover {
+  color: #5E96FC;
+  opacity: .8;
 }
 .mobile-navigation {
   display: none;

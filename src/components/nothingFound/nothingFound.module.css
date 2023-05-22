@@ -14,6 +14,10 @@
   font-size: 24px;
   line-height: 29px;
 }
+.nothing-found > button { 
+  margin: 0 auto; 
+  padding: 10px 24px; 
+}
 @media (max-width: 800px) {
   .nothing-found.is-vacancies {
     position: relative;

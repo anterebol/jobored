@@ -24,6 +24,7 @@ export const NothingFound = ({ isFavoritesPage }: { isFavoritesPage: boolean }) 
           }}
           variant="light"
           color="indigo"
+          style={{ margin: '0 auto', padding: '10px 24px' }}
         >
           Поиск Вакансий
         </Button>

@@ -1,6 +1,6 @@
 import { CatalougeType, VacancyType } from './../types/types';
 import { createSlice } from '@reduxjs/toolkit';
-import { getToken, getVacancies, getVacancy } from './api/api';
+import { getCatalouge, getToken, getVacancies, getVacancy } from './api/api';
 import { getFavorites } from '@/utils/getFavorites';
 import { initialFormValues } from '@/constants/default/initialFormValues';
 
@@ -16,6 +16,7 @@ const initialState = {
     vacancies: 1,
   },
   formState: { ...initialFormValues },
+  catalouge: [] as Array<CatalougeType>,
 };
 
 const appSlice = createSlice({
@@ -24,11 +25,6 @@ const appSlice = createSlice({
   reducers: {
     setVacancy: (state, action) => {
       state.vacancy = { ...action.payload };
-    },
-    getFavorites: (state) => {
-      const favorites = localStorage.getItem('favorites') || undefined;
-      console.log(favorites);
-      state.favoritesId = favorites ? JSON.parse(favorites) : [];
     },
     setFavorite: (state, action) => {
       state.favorite = { ...action.payload };
@@ -63,7 +59,10 @@ const appSlice = createSlice({
     },
     [getToken.rejected.type]: (state) => {
       localStorage.setItem('token', '');
-      // state.token = '';
+      state.token = '';
+    },
+    [getCatalouge.fulfilled.type]: (state, action) => {
+      state.catalouge = [...action.payload];
     },
     [getVacancies.fulfilled.type]: (state, action) => {
       state.vacancies = [...action.payload];

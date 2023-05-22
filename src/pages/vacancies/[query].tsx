@@ -1,5 +1,5 @@
-import { getToken } from '@/store/api/api';
-import { CatalougeType, FormType } from '@/types/types';
+import { getCatalouge, getToken } from '@/store/api/api';
+import { FormType } from '@/types/types';
 import { Filter } from '@/components/forms/filter/Filter';
 import { useEffect } from 'react';
 import styles from './vacancies.module.css';
@@ -10,17 +10,14 @@ import { Paginate } from '@/components/paginate/Paginate';
 import { KeyWordForm } from '@/components/forms/keywordForm/KeywordForm';
 import { setForm } from '@/store/appReducer';
 import { useRouter } from 'next/router';
-import { createPath } from '@/utils/createPath';
-import { URL } from '@/constants/query/url';
-import { CATALOGUES_PATH, VACANCIES_PATH } from '@/constants/query/path';
-import { headers } from '@/constants/query/headers';
+import { VACANCIES_PATH } from '@/constants/query/path';
 import { parseQuery } from '@/utils/parseQuery';
 import { pageCount, itemsPerPage } from '@/constants/default/default';
 import { ListVacancies } from '@/components/vacanciesList/VacanciesList';
 import { NothingFound } from '@/components/nothingFound/NothingFound';
 
-export const Vacancies = ({ catalogues }: { catalogues: Array<CatalougeType> }) => {
-  const { vacancies, token, loaded, formState } = useAppSelector((state) => state);
+export const Vacancies = () => {
+  const { vacancies, token, loaded, formState, catalouge } = useAppSelector((state) => state);
   const { query } = useRouter().query as { query: string };
   const { page } = parseQuery(query);
   const dispatch = useAppDispatch();
@@ -48,21 +45,24 @@ export const Vacancies = ({ catalogues }: { catalogues: Array<CatalougeType> }) 
   };
 
   useEffect(() => {
+    dispatch(getCatalouge());
     if (!token) {
       dispatch(getToken());
     }
   }, []);
 
   useEffect(() => {
-    _getVacancies({
-      ...formState,
-    });
+    if (token && page) {
+      _getVacancies({
+        ...formState,
+      });
+    }
   }, [token, page]);
 
   return (
     <div className={styles['vacancies-page']}>
       <div className={styles['left-bar']}>
-        <Filter submit={_getVacancies} cataloguesProps={catalogues} />
+        <Filter submit={_getVacancies} cataloguesProps={catalouge} />
       </div>
       <div className={styles['right-bar']}>
         <KeyWordForm submit={_getVacancies} />
@@ -86,20 +86,5 @@ export const Vacancies = ({ catalogues }: { catalogues: Array<CatalougeType> }) 
     </div>
   );
 };
-
-export async function getServerSideProps() {
-  const path = createPath(URL, CATALOGUES_PATH, undefined);
-  const response = await fetch(path, {
-    method: 'GET',
-    headers: headers,
-    redirect: 'follow',
-  });
-  const data = await response.json();
-  return {
-    props: {
-      catalogues: data,
-    },
-  };
-}
 
 export default Vacancies;
