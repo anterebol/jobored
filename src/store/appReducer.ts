@@ -1,4 +1,4 @@
-import { FormType, VacancyType } from './../types/types';
+import { VacancyType } from './../types/types';
 import { createSlice } from '@reduxjs/toolkit';
 import { getToken, getVacancies, getVacancy } from './api/api';
 import { getFavorites } from '@/utils/getFavorites';
@@ -23,7 +23,6 @@ const appSlice = createSlice({
   initialState: { ...initialState },
   reducers: {
     setVacancy: (state, action) => {
-      console.log(action.payload);
       state.vacancy = { ...action.payload };
     },
     setFavorite: (state, action) => {
@@ -49,9 +48,7 @@ const appSlice = createSlice({
       }
     },
     setForm: (state, action) => {
-      console.log(action.payload);
       state.formState = { ...state.formState, ...action.payload };
-      console.log(state.formState);
     },
   },
   extraReducers: {
@@ -61,6 +58,7 @@ const appSlice = createSlice({
     },
     [getToken.rejected.type]: (state) => {
       localStorage.setItem('token', '');
+      // state.token = '';
     },
     [getVacancies.fulfilled.type]: (state, action) => {
       state.vacancies = [...action.payload];

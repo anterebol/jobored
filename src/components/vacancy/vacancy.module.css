@@ -67,8 +67,6 @@
   max-width: 770px;
   margin: 0 auto;
   margin-bottom: 50px;
-  /* font-weight: 400;
-  font-size: 16px !important; */
 }
 .details-box > b, .details-box > p > b {
   font-size: 20px !important;
@@ -84,4 +82,31 @@
 }
 .vacancy-star:hover {
   opacity: .6;
+}
+@media (max-width: 800px) {
+  .vacancy-box, .details-box {
+    margin: 20px;
+  }
+}
+@media (max-width: 600px) {
+  .vacancy-box {
+    /* margin: 20px; */
+    text-align: center;
+  }
+  .vacancy-title {
+    max-width: 90%;
+    font-weight: 700;
+    font-size: 20px;
+  }
+  .vacancy-info {
+    display: block;
+    text-align: center;
+  }
+  .vacancy-location {
+    display: block;
+    height: 100%;
+  }
+  .details-box {
+    font-size: 14px;
+  }
 }

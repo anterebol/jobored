@@ -14,3 +14,10 @@
   font-size: 24px;
   line-height: 29px;
 }
+@media (max-width: 800px) {
+  .nothing-found {
+    position: relative;
+    gap: 0;
+    display: block;
+  }
+}

@@ -9,22 +9,22 @@ import { NothingFound } from '@/components/nothingFound/NothingFound';
 import { useRouter } from 'next/router';
 import { itemsPerPage } from '@/constants/default/default';
 import { parseQuery } from '@/utils/parseQuery';
-import { VACANCY_PATH } from '@/constants/query/path';
+import { FAVORITES_PATH, VACANCY_PATH } from '@/constants/query/path';
+import styles from './favorites.module.css';
 
 export const Favorites = () => {
-  const { query } = useRouter().query as { query: string };
-  console.log(query);
+  const router = useRouter();
+  const { query } = router.query as { query: string };
   const { page } = parseQuery(query);
   const { vacancies, token, favoritesId, loaded } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
-  const router = useRouter();
   const itemOffset = (page - 1) * itemsPerPage;
   const endOffset = itemOffset + itemsPerPage;
   const currentItems = favoritesId.slice((page - 1) * itemsPerPage, endOffset);
   const pageCount = Math.ceil(favoritesId.length / itemsPerPage);
 
   if (currentItems.length === 0 && page > 1) {
-    router.push(`/favorites/page=${page - 1}`);
+    router.push(`/${FAVORITES_PATH}/page=${page - 1}`);
   }
 
   useEffect(() => {
@@ -35,6 +35,7 @@ export const Favorites = () => {
 
   useEffect(() => {
     if (token && currentItems.length !== 0) {
+      // router.push()
       dispatch(
         getVacancies({
           token: token,
@@ -49,7 +50,7 @@ export const Favorites = () => {
   }, [token, favoritesId, page]);
 
   return (
-    <>
+    <div className={styles['favorites-page']}>
       {loaded ? (
         currentItems.length > 0 ? (
           vacancies.map((vacancy: VacancyType) => {
@@ -62,13 +63,13 @@ export const Favorites = () => {
             }
           })
         ) : (
-          <NothingFound isFavorites={true} />
+          <NothingFound isFavoritesPage={true} />
         )
       ) : (
         <Preloader />
       )}
       <Paginate pageType={'favorites'} page={page} pageCount={pageCount} />
-    </>
+    </div>
   );
 };
 

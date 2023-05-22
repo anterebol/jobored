@@ -6,14 +6,16 @@ import { Button } from '@mantine/core';
 import { useAppSelector } from '@/hooks/hooks';
 import { VACANCIES_PATH } from '@/constants/query/path';
 
-export const NothingFound = ({ isFavorites }: { isFavorites: boolean }) => {
+export const NothingFound = ({ isFavoritesPage }: { isFavoritesPage: boolean }) => {
   const { currentPage } = useAppSelector((state) => state);
   const router = useRouter();
   return (
-    <div className={styles['nothing-found']}>
+    <div
+      className={[styles['nothing-found'], isFavoritesPage ? styles['is-vacancies'] : ''].join(' ')}
+    >
       <Image src={nothingFound} alt={'nothing-found'} />
       <h2>Упс, здесь еще ничего нет!</h2>
-      {isFavorites ? (
+      {isFavoritesPage ? (
         <Button
           onClick={() => {
             router.push(`/${VACANCIES_PATH}/page=${currentPage.vacancies}`);

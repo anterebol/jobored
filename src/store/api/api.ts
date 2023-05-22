@@ -42,10 +42,8 @@ export const getVacancies = createAsyncThunk(
     },
     { rejectWithValue }
   ) => {
-    console.log(vacanciesParams);
     try {
       const path = createPath(URL, VACANCIES_PATH, vacanciesParams);
-      console.log(path);
       if (!path) return [];
       const response = await fetch(path, {
         method: 'GET',

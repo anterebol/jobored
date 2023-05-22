@@ -43,3 +43,9 @@
   cursor: default !important;
   color: black !important;
 }
+@media (max-width: 800px) {
+  .pagination {
+    position: relative;
+    top: 25px;
+  }
+}
