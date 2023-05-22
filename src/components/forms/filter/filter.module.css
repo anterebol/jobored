@@ -1,0 +1,79 @@
+.form-box { 
+  padding: 20px;
+  background: white;
+  min-width: 275px;
+  max-width: 275px;
+  width: 100%;
+}
+.form-head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+.form-title {
+  font-weight: 700;
+  font-size: 20px;
+}
+.form-reset-btn {
+  background: none;
+  border: none;
+  font-weight: 500;
+  font-size: 14px;
+  color: black;
+  transition: ease .4s;
+  opacity: .5;
+}
+.form-reset-btn:hover {
+  opacity: .8;
+  cursor: pointer;
+}
+.form-select {
+  margin-bottom: 20px;
+}
+.form-select-btn {
+  opacity: .5;
+}
+.form-select-btn:hover {
+  opacity: .8;
+}
+.form-buttons-salary {
+  position: relative;
+  /* right: 0px; */
+}
+.form-article-title {
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+.form-buttons-salary > button {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  display: block;
+  width: 12px;
+  height: 12px ;
+  cursor: pointer;
+  opacity: .4;
+  transition: ease .4s;
+}
+.form-buttons-salary > button:hover {
+  opacity: 1;
+}
+.form-submit-button {
+  width: 100%;
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  background: #5E96FC;
+  transition: ease .4s;
+}
+.form-submit-button:hover {
+  background: #508af6;
+}
+@media (max-width: 800px) {
+  .form-box {
+    max-width: 100%;
+  }
+}

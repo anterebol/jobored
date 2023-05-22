@@ -1,0 +1,27 @@
+.nothing-found {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  display: grid;
+  gap: 32px;
+}
+.nothing-found > h2 {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+}
+.nothing-found > button { 
+  margin: 0 auto; 
+  padding: 10px 24px; 
+}
+@media (max-width: 800px) {
+  .nothing-found.is-vacancies {
+    position: relative;
+    gap: 0;
+    display: block;
+  }
+}
