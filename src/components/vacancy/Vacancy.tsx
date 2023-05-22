@@ -1,7 +1,7 @@
 import { VacancyProps } from '@/types/types';
 import styles from './vacancy.module.css';
 import Image from 'next/image';
-import star from '@/assets/star.svg';
+import star from '@/assets/Star.svg';
 import blueStar from '@/assets/blueStar.svg';
 import location from '@/assets/location.svg';
 import { useState } from 'react';
